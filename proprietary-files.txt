@@ -1,0 +1,200 @@
+# Bin
+bin/amixer
+bin/androidvncserver
+bin/aplay
+bin/appCoda7542Dec
+bin/appCoda7542Enc
+bin/atcmdsrv
+bin/cploader
+bin/diag
+bin/diag_thp_test
+bin/diag_usb_test
+bin/eeh
+bin/emmc_fsck
+#hciattach
+#hostapd
+bin/hwacc
+bin/i2cdetect
+bin/i2cdump
+bin/i2cget
+bin/i2cset
+bin/lpmkey
+bin/MarvellWirelessDaemon
+bin/mlanutl
+bin/mrvl_dut
+bin/msocket_testport
+#npsmobex
+bin/nvm
+bin/pand
+bin/playlpm
+bin/ppd_cmd
+bin/rfkill
+#sdptool
+bin/sensord
+bin/serial_cfun0
+bin/serial_client
+bin/serial_client_test
+bin/simal
+bin/telmon
+bin/usr_path_ctrl
+bin/vcm
+bin/vt_test
+
+
+# Graphics
+lib/egl/libEGL_MRVL.so
+lib/egl/libGLESv1_CM_MRVL.so
+lib/egl/libGLESv2_MRVL.so
+lib/libGAL.so
+
+# Audio
+lib/hw/audio.primary.mrvl.so
+lib/hw/audio_path.adda.mrvl.so
+lib/hw/audio_path.fm.mrvl.so
+lib/hw/audio_path.hifi.mrvl.so
+lib/hw/audio_path.vc.mrvl.so
+lib/hw/audio_path.voip.mrvl.so
+lib/hw/audio_path.vt.mrvl.so
+lib/hw/audio_policy.mrvl.so
+lib/libacoustic.so
+lib/libaudiodebugtool.so
+lib/libMarvellWireless.so
+lib/libaudiosa.so
+
+# Marvell Libs
+lib/liblvvewrapper.so
+lib/libmarvell-nvaccessor.so
+lib/libmarvell-ril.so
+lib/libMarvellWireless.so
+lib/libmiscgen.so
+lib/libMrvlOmx.so
+lib/libnvaccessor.so
+lib/libmtelif.so
+
+# Camera
+cameradata/datapattern_420sp.yuv
+cameradata/datapattern_front_420sp.yuv
+lib/hw/camera.mrvl.so
+lib/libcameraengine.so
+lib/libcodecjpegdec.so
+lib/libcodecjpegenc.so
+lib/libmiscgen.so
+lib/libphycontmem.so
+lib/libsecnativefeature.so
+lib/libsocketsvr.so
+etc/ov5647_scene_tuning.data
+
+# Codecs
+lib/libcoda7542hal.so
+lib/libcoda7542.so
+lib/libcodecaacdec.so
+lib/libcodecaacenc.so
+lib/libcodecamrnbdec.so
+lib/libcodecamrnbenc.so
+lib/libcodecamrwbdec.so
+lib/libcodecamrwbenc.so
+lib/libcodeccoda7542dec.so
+lib/libcodeccoda7542enc.so
+lib/libcodech263dec.so
+lib/libcodech263enc.so
+lib/libcodech264dec.so
+lib/libcodech264enc.so
+lib/libcodecjpegdec.so
+lib/libcodecjpegenc.so
+lib/libcodecmp3dec.so
+lib/libcodecmpeg2dec.so
+lib/libcodecmpeg4dec.so
+lib/libcodecmpeg4enc.so
+lib/libcodecpngdec.so
+lib/libcodecwmadec.so
+lib/libcodecwmvdec.so
+lib/libffmpeg.so
+
+# Sensors
+lib/hw/sensors.mrvl.so
+
+# CPU Freq
+lib/libcpufreqinterface.so
+lib/libcpufreq.so
+
+# GPS
+lib/hw/gps.default.so
+etc/AGPS_CA.pem
+
+# Unknown
+lib/hw/csr.cpd.so
+#Needed Library 'libutils.so'
+#Needed Library 'liblog.so'
+#Needed Library 'libcutils.so'
+#Needed Library 'libdl.so'
+#Needed Library 'libc.so'
+#Needed Library 'libstdc++.so'
+#Needed Library 'libm.so'
+#Shared Name 'csr.cpd.so'
+
+
+# Marvell Firmware
+etc/firmware/mrvl/reg_alpha2
+etc/firmware/mrvl/sd8787_uapsta.bin
+etc/firmware/mrvl/txpwrlimit_cfg.conf
+etc/firmware/mrvl/w8787_wlan_SDIO_bt_SDIO.bin
+etc/firmware/mrvl/WlanCalData_ext.conf
+etc/firmware/mrvl/WlanCalData_ext.conf_0
+
+# Libs unknown
+#lib/libxml2.so
+lib/libwtpsp.so
+lib/libwtpsp_ss.so
+lib/libwtpsp.so
+lib/libwtpsp_ss.so
+lib/libusbsetting.so
+lib/libsysfs.so
+
+# Might not need this
+lib/libstagefrighthw.so
+lib/libsraxxd.so
+lib/libsrvxxd.so
+lib/libsimal.so
+lib/libserialport.so
+lib/libceu.so
+lib/libCSP.so
+lib/libgcu.so
+lib/libgpucsc.so
+lib/lib_gsd5t_mode7.so
+lib/libbz.so
+lib/libaah_rtp.so
+
+# Could be a sensor
+lib/libacm.so
+lib/libAndroidEvent.so
+lib/libHSV.so
+lib/libHWComposerGC.so
+lib/libionhelper.so
+lib/libippimgp.so
+lib/libippsp.so
+lib/libippvp.so
+lib/libOrgan.so
+lib/libpmemhelper.so
+
+# Probably related to marvell powerdaemon files in etc
+lib/libPowerSetting.so
+lib/libparseTim.so
+lib/libSDRMInvLH.so
+
+
+# Display
+lib/hw/lights.mrvl.so
+lib/hw/gralloc.mrvl.so
+lib/hw/hwcomposer.mrvl.so
+lib/libHWComposerGC.so
+lib/libgcu.so
+
+# Drm
+lib/libdivxdrm.so
+lib/drm/libdrmwvmplugin.so
+lib/drm/libdrmwvmplugin.id0
+lib/drm/libdrmwvmplugin.id1
+lib/drm/libdrmwvmplugin.nam
+lib/libWVStreamControlAPI_L3.so
+lib/libwvdrm_L3.so
+
