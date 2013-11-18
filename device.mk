@@ -30,7 +30,7 @@ PRODUCT_PACKAGES += \
 
 # Prebuilt Kernel
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/kernel:kernel
+    $(LOCAL_PATH)/zImage:kernel
 
 # Recovery rootdir
 PRODUCT_COPY_FILES += \
