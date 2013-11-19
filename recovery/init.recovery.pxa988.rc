@@ -1,8 +1,8 @@
 on init
 
     # ko files for exfat
-    insmod /lib/modules/exfat_core.ko
-    insmod /lib/modules/exfat_fs.ko
+    insmod /system/lib/modules/exfat_core.ko
+    insmod /system/lib/modules/exfat_fs.ko
     
     # Set touchscreen to landscape mode for recovery
     write /sys/devices/virtual/sec/tsp/orientation 6
