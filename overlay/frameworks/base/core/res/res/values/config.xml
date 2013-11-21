@@ -271,10 +271,6 @@
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">true</bool>
 
-    <!-- Home button Wake Support. Some devices do not support this.
-     Setting to false will disable Home button Wake support -->
-    <bool name="config_show_homeWake">true</bool>
-
     <!-- Hardware 'face' keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
          of the following keys present:
@@ -291,6 +287,8 @@
     <integer name="config_panelAutoBrightnessValue">1</integer>
 
     <!-- True if the Irda service should be started at system start -->
-    <bool name="config_enableIrdaManagerService">true</bool>
+    <!-- bool name="config_enableIrdaManagerService">true</bool -->
+
+    <bool name="config_enableLockScreenTranslucentDecor">true</bool>
 
 </resources>

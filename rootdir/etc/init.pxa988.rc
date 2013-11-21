@@ -8,8 +8,14 @@ on init
     mkdir /storage/emulated 0555 root root
 
     #External storage directories
-    mkdir /storage/sdcard1 0000 system system
-    mkdir /storage/usbdisk0 0000 system system
+    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /storage/usbdisk 0000 system system
+    mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
+
+    mkdir /storage/sdcard0 0700 root root
+    mkdir /storage/sdcard1 0700 root root
+    mkdir /storage/usbdisk 0700 root root
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export SECONDARY_STORAGE /storage/sdcard1:/storage/usbdisk0
@@ -198,7 +204,7 @@ on post-fs
 
     chown system system /sys/devices/platform/galcore/power/control
 
-    #gpu
+    # GPU
     chown system system /sys/devices/platform/galcore/gpu/gpu0/gpufreq/scaling_cur_governor
     chown system system /sys/devices/platform/galcore/gpu/gpu0/gpufreq/scaling_min_freq
     chown system system /sys/devices/platform/galcore/gpu/gpu0/gpufreq/scaling_max_freq
@@ -218,10 +224,6 @@ on post-fs-data
     setprop wifi.interface wlan0
     setprop wifidirect.interface p2p0
 
-# MTP permission
-    chmod 0660 /dev/usb_mtp_gadget
-    chown system system /dev/usb_mtp_gadget
-
     # create folder to save wifi/bt config files with mac address, and calibrate files
     mkdir /data/misc/wireless 0771 system system
 
@@ -238,18 +240,17 @@ on post-fs-data
     chown system system /efs/wifi/.mac.info
     chmod 0664 /efs/wifi/.mac.info
 
-# Permissions for bluetooth
+    # Permissions for bluetooth
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"   
     chown bluetooth bluetooth ro.bt.bdaddr_path  
 
-# Audio (Earjack) KSND
+    # Audio (Earjack) KSND
     chown system radio /sys/class/audio/earjack/select_jack
     chown system radio /sys/class/audio/earjack/key_state
     chown system radio /sys/class/audio/earjack/state
     chown media system /sys/class/audio/earjack/reselect_jack
 
-#SENSOR
-#grip
+    # SENSOR Grip
     chown radio system /sys/class/input/input7/enable
     chmod 0664 /sys/class/input/input5/enable
 
@@ -269,7 +270,7 @@ on post-fs-data
     chmod 0664 /sys/class/sensors/grip_sensor/onoff
     chmod 0444 /sys/class/sensors/grip_sensor/vendor
 
-#proximity/lightsensor
+    # Proximity/lightsensor
     chown system radio /sys/class/input/input5/enable
     chmod 0664 /sys/class/input/input5/enable
     chown system radio /sys/class/input/input6/enable
@@ -308,7 +309,7 @@ on post-fs-data
     chown system radio /efs/prox_cal 
     chmod 0666 /efs/prox_cal
 
-#magnetic sensor
+    # Magnetic sensor
     chown system radio /sys/class/input/input4/chip_id
     chown system radio /sys/class/input/input4/raw_data
     chown system radio /sys/class/input/input4/op_mode
@@ -343,7 +344,7 @@ on post-fs-data
     chmod 0444 /sys/class/sensors/magnetic_sensor/name
     chmod 0444 /sys/class/sensors/magnetic_sensor/vendor
 
-#acc sensor
+    # Acc sensor
     chown system radio /sys/class/input/input3/raw_data
     chown system radio /sys/class/input/input3/value
     chown system radio /sys/class/input/input3/fast_calibration_x
@@ -392,7 +393,7 @@ on post-fs-data
     chown system radio /efs/calibration_data
     chmod 0666 /efs/calibration_data
 
-#for cts test
+    # For cts test
     chown system system /sys/devices/virtual/camera/rear/rear_flash
     chmod 0664 /sys/devices/platform/Sec_BattMonitor/power_supply/battery/reset_soc
     chmod 0664 /sys/devices/platform/Sec_BattMonitor/fuelgaic
@@ -408,57 +409,36 @@ on post-fs-data
     chmod 0664 /sys/kernel/debug/pxa/gic_dist
     chmod 0664 /sys/kernel/debug/pxa/dvfs/dc_clk_dvfs
 
-#for charge current
+    # For charge current
     chown radio media_rw /sys/class/power_supply/battery/device/call_status
 
-    # for blcr
-    #mkdir /data/blcr 0775 system system
-    # marvell_dut
+    # Marvell_dut
     insmod /system/lib/modules/mlan.ko
 
-# MTP permission
-	chmod 0660 /dev/usb_mtp_gadget
-	chown system system /dev/usb_mtp_gadget
-
 on boot
-
-# SISO-ANDR-PERF :: START Changing governor to performance and scheduler to noop once boot is started
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor	performance
-    write /sys/block/mmcblk0/queue/scheduler noop
-# SISO-ANDR-PERF :: END HERE
 
     setprop ro.media.gst.enabled 1
     setprop service.camera.af 1
 
     # enable bluetooth dial-up network
     setprop  ro.bluetooth.dun true
+
     # NFC
     setprop ro.nfc.port "I2C"
     chmod 0777 /dev/pn547
     chown nfc nfc /dev/pn547
 
-    # set opengles version as 0x20000
-    # opengles major version = (version & 0xffff0000)>>16
-    # opengles minor version = version & 0xffff
-    setprop ro.opengles.version 131072
-
-# create virtual SD card at /mnt/sdcard, based on the /data/media directory
-# daemon will drop to user/group system/media_rw after initializing
-# underlying files in /data/media wil be created with user and group media_rw (1023)
-service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
+service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
     class late_start
+    disabled
 
-on property:persist.sys.dump.enable=1
-    write /sys/power/panic CRASH_ENABLE
+service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
+    class late_start
+    disabled
 
-# on property:persist.sys.tools.enable=1
-#     mkdir /data/vendor
-#     mount ext4 /dev/block/mmcblk0p15 /data/vendor
-#     chown system system /data/vendor
-#     chmod 0755 /data/vendor
-
-on property:persist.sys.tools.enable=0
-    exec /system/bin/umount /data/vendor
+service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
+    class late_start
+    disabled
 
 # we will start as root and wpa_supplicant will switch to user wifi
 # after setting up the capabilities required for WEXT
@@ -502,19 +482,6 @@ service iprenew_p2p /system/bin/dhcpcd -n
     disabled
     oneshot
 
-#for WiFi MFG(TestMode)
-service mfgloader /system/bin/mfgloader
-    class main
-    disabled
-    oneshot
-
-service wlandutservice /system/bin/wlandutservice
-    class main
-    user system
-    group wifi net_raw net_admin system inet
-    disabled
-    oneshot
-
 service macloader /system/bin/macloader
     class main
     oneshot
@@ -528,49 +495,10 @@ service macloader /system/bin/macloader
     chown system system /dev/ttyGS2
     chown system system /dev/ttyGS3
 
-#datarouter
-service DR-daemon /system/bin/ddexe
-    class main
-    user root
-    group system radio inet net_raw
- 
-service KIES-daemon /system/bin/kiesexe
-    class main
-    user root
-    group system radio inet net_raw
- 
-service SMD-daemon /system/bin/smdexe
-    class main
-    user root
-    group system radio inet net_raw
- 
-service DTT-daemon /system/bin/dttexe
-    class main
-    user root
-    group system radio inet net_raw
-
-service BCS-daemon /system/bin/connfwexe
-    class main
-    user root
-    group system radio inet net_raw
-     
-service mobex-daemon /system/bin/npsmobex
-    class main
-    user system
-    group system inet sdcard_rw
-
 # init.rc does not yet support applying capabilities, so run as root and
 # let wireless daemon drop uid to system with the right linux capabilities
 service mwirelessd /system/bin/MarvellWirelessDaemon
     class main
-
-#service vncserver /system/bin/logwrapper /system/bin/androidvncserver
-#    class main
-
-service filemonitor /system/bin/FileMonitorService
-    class main
-    user system
-    group system
 
 #service setup_fs /system/bin/setup_fs /dev/block/platform/sdhci-pxav3.2/by-name/cache /dev/block/platform/sdhci-pxav3.2/by-name/NVM
 service setup_fs /system/bin/setup_fs /dev/block/mmcblk0p15 /dev/block/mmcblk0p12
@@ -586,44 +514,20 @@ service bt_dut_cmd /system/bin/mrvl_dut
      disabled
      oneshot
 
-service PowerDaemon /system/bin/powerdaemon -A -D
-    class main
-    user system
-    group system
-
-#datarouter
-service DR-daemon /system/bin/ddexe
-    class main
-    user root
-    group system radio inet net_raw
+#service PowerDaemon /system/bin/powerdaemon -A -D
+#    class main
+#    user system
+#    group system
 
 service sensord /system/bin/sensord
     class main
     user system
     group system
 
-service SMD-daemon /system/bin/smdexe
+# bugreport is triggered by holding down volume down, volume up and power
+service bugreport /system/bin/dumpstate -d -p -B \
+        -o /data/data/com.android.shell/files/bugreports/bugreport
     class main
-    user root
-    group system radio inet net_raw
- 
-service DTT-daemon /system/bin/dttexe
-    class main
-    user root
-    group system radio inet net_raw
-
-service BCS-daemon /system/bin/connfwexe
-    class main
-    user root
-    group system radio inet net_raw
-     
-service mobex-daemon /system/bin/npsmobex
-    class main
-    user system
-    group system inet sdcard_rw
-
-
-# init.rc does not yet support applying capabilities, so run as root and
-# let FMRadioServer drop uid to system with the right linux capabilities
-service FMRadiod /system/bin/FMRadioServer
-    class main
+    disabled
+    oneshot
+    keycodes 114 115 116

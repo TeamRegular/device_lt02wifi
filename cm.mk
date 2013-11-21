@@ -19,4 +19,4 @@ PRODUCT_MODEL := SM-T210R
 PRODUCT_MANUFACTURER := samsung
 
 # Set build fingerprint / ID / Product Name etc.
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=cm_lt02wifi BUILD_FINGERPRINT=cyanogenmod/cm_lt02wifiue/lt02wifi:4.2.2/$(BUILD_ID) PRIVATE_BUILD_DESC="lt02wifiue 4.2.2"
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=cm_lt02wifi BUILD_FINGERPRINT=cyanogenmod/cm_lt02wifiue/lt02wifi:4.4/$(BUILD_ID) PRIVATE_BUILD_DESC="lt02wifiue 4.4"

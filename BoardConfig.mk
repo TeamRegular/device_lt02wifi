@@ -17,7 +17,7 @@ BOARD_VENDOR := samsung
 TARGET_BOARD_PLATFORM := mrvl
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
-
+ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_BOOTLOADER_BOARD_NAME := PXA986
 
 # Not Yet
@@ -39,7 +39,7 @@ BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
-TARGET_RECOVERY_FSTAB := device/samsung/lt02wifi/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/samsung/lt02wifi/rootdir/etc/fstab.pxa988
 
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
@@ -58,23 +58,23 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 5775556608
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Wifi related defines
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-WPA_SUPPLICANT_VERSION := VER_0_8_X
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_mrvl8787
-BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_mrvl8787
-BOARD_WLAN_DEVICE := mrvl8787
-BOARD_HAVE_MARVELL_WIFI := true
-WIFI_SDIO_IF_DRIVER_MODULE_PATH  := "/system/lib/modules/mlan.ko"
-WIFI_SDIO_IF_DRIVER_MODULE_NAME  := "mlan"
-WIFI_SDIO_IF_DRIVER_MODULE_ARG   := ""
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/sd8787.ko"
-WIFI_DRIVER_MODULE_NAME := "sd8787"
-WIFI_DRIVER_MODULE_ARG  := "drv_mode=5 cfg80211_wext=0xc sta_name=wlan uap_name=wlan wfd_name=p2p max_uap_bss=1 fw_name=mrvl/sd8787_uapsta.bin"
-WIFI_DRIVER_FW_PATH_PARAM := "/proc/mwlan/config"
-WIFI_DRIVER_FW_PATH_STA := "drv_mode=5"
-WIFI_DRIVER_FW_PATH_AP :=  "drv_mode=6"
-WIFI_DRIVER_FW_PATH_P2P := "drv_mode=5"
+#BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+#WPA_SUPPLICANT_VERSION := VER_0_8_X
+#BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_mrvl8787
+#BOARD_HOSTAPD_DRIVER := NL80211
+#BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_mrvl8787
+#BOARD_WLAN_DEVICE := mrvl8787
+#BOARD_HAVE_MARVELL_WIFI := true
+#WIFI_SDIO_IF_DRIVER_MODULE_PATH  := "/system/lib/modules/mlan.ko"
+#WIFI_SDIO_IF_DRIVER_MODULE_NAME  := "mlan"
+#WIFI_SDIO_IF_DRIVER_MODULE_ARG   := ""
+#WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/sd8787.ko"
+#WIFI_DRIVER_MODULE_NAME := "sd8787"
+#WIFI_DRIVER_MODULE_ARG  := "drv_mode=5 cfg80211_wext=0xc sta_name=wlan uap_name=wlan wfd_name=p2p max_uap_bss=1 fw_name=mrvl/sd8787_uapsta.bin"
+#WIFI_DRIVER_FW_PATH_PARAM := "/proc/mwlan/config"
+#WIFI_DRIVER_FW_PATH_STA := "drv_mode=5"
+#WIFI_DRIVER_FW_PATH_AP :=  "drv_mode=6"
+#WIFI_DRIVER_FW_PATH_P2P := "drv_mode=5"
 
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 17
@@ -97,6 +97,9 @@ TARGET_FORCE_CPU_UPLOAD := true
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/lt02wifi/bluetooth
+
+# Use the CM PowerHAL
+TARGET_USES_CM_POWERHAL := true
 
 # Charging mode
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
