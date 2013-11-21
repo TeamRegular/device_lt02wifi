@@ -117,10 +117,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/samsung/lt02wifi/configs/media_codecs.xml:system/etc/media_codecs.xml
 
-# Bluetooth config file
-PRODUCT_COPY_FILES += \
-    system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf \
-
 PRODUCT_CHARACTERISTICS := tablet
 
 PRODUCT_PACKAGES += \
