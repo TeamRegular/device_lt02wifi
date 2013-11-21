@@ -24,13 +24,13 @@ TARGET_BOOTLOADER_BOARD_NAME := PXA986
 #TARGET_BOARD_INFO_FILE := device/samsung/lt02wifi/board-info.txt
 
 # Kernel
-#TARGET_KERNEL_SOURCE         := kernel/samsung/lt02wifi
+TARGET_KERNEL_SOURCE         := kernel/samsung/lt02-common
 BOARD_KERNEL_CMDLINE         := 
 BOARD_KERNEL_BASE            := 0x10000000
 BOARD_MKBOOTIMG_ARGS         := --ramdisk_offset 0x11000000
 BOARD_KERNEL_PAGESIZE        := 2048
-#TARGET_KERNEL_CONFIG         := pxa986_lt02wifi_defconfig
-#TARGET_KERNEL_SELINUX_CONFIG := lt02selinux_defconfig
+TARGET_KERNEL_CONFIG         := cyanogenmod_lt02wifi_defconfig
+TARGET_KERNEL_SELINUX_CONFIG := lt02selinux_defconfig
 
 # Recovery
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"

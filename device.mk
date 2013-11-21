@@ -28,10 +28,6 @@ PRODUCT_PACKAGES += \
     lpm.rc \
     ueventd.pxa988.rc
 
-# Prebuilt Kernel
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/zImage:kernel
-
 # Recovery rootdir
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/init.recovery.pxa988.rc:root/init.recovery.pxa988.rc
