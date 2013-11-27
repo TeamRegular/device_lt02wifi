@@ -126,18 +126,10 @@ PRODUCT_PACKAGES += \
     librs_jni \
     com.android.future.usb.accessory
 
-# PowerDaemon
-PRODUCT_PACKAGES += \
-    powerdaemon \
-    delegate_cpu \
-    delegate_ddr \
-    delegate_gpu \
-    delegate_shcmd \
-    plugin_android \
-    plugin_coda \
-    plugin_thermal \
-    plugin_input \
-    plugin_camera
+# Enable repeatable keys in cwm
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.cwm.enable_key_repeat=true \
+    ro.cwm.repeatable_keys=114,115
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
